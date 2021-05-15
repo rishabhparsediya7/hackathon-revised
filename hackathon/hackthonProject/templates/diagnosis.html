@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+    <title>DMD and Group</title>
+
+    <style>
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+        }
+        
+        body,
+        html {
+            min-height: 100vh;
+            background: #666;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-weight: 300;
+        }
+        
+        @media only screen and (max-device-width: 736px) {}
+    </style>
+</head>
+
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">DMD & Group</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Services
+                </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Diagnosis</a></li>
+                            <li><a class="dropdown-item" href="#">Scanning</a></li>
+                            <li><a class="dropdown-item" href="#">Lab Reports</a></li>
+                            <li><a class="dropdown-item" href="#">Patient's History</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">More.....</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact to Doctors</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!--Navbar-->
+    <!--Heading-->
+    <div class="container">
+        <div style="text-align: center; margin-top: 30px;">
+            <p class="h1">Choose your disease for diagnosis</p>
+        </div>
+        <!--Heading-->
+        <!--Blocks of diseases-->
+        <div class="row" style="grid-column-gap:20px; grid-row-gap:30px">
+            <div class="alert alert-primary col" role="alert" style="width: 35%; height: 200px;">
+                <div>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <h3 class=" verticle-center">COVID-19 Detection using X-Rays</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="alert alert-secondary col" role="alert" style="width: 35%; height: 200px;">
+                <h3 class=" verticle-center">Cataract Detection</h3>
+            </div>
+            <div class="alert alert-success col" role="alert" style="width: 35%; height: 200px;">
+                <h3 class="alert-heading verticle-center">Skin Cancer Detection</h3>
+            </div>
+        </div>
+        <div class="row" style="grid-column-gap:20px; grid-row-gap:30px">
+            <div class="alert alert-danger col" role="alert" style="width: 35%; height: 200px;">
+                <h3 class="alert-heading verticle-center">Brain Tumor Detection</h3>
+            </div>
+            <div class="alert alert-warning col" role="alert" style="width: 35%; height: 200px;">
+                <h3 class="alert-heading verticle-center">Pneumonia Detection</h3>
+            </div>
+            <div class="alert alert-info col" role="alert" style="width: 35%; height: 200px;">
+                <h3 class="alert-heading verticle-center">Diabetic Retinopathy Detection</h3>
+            </div>
+        </div>
+        <!--Blocks of diseases-->
+
+        <!-- Button trigger modal -->
+
+
+        <!-- Modal for covid-19 detection -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Upload X-Ray</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" enctype="multipart/form-data" action="/upload">
+                            {% csrf_token %} {{ form.as_p }}
+                            <input type="text" name="title" id="">
+                            <input type="file" name="image" id="">
+                            <button type="submit">Upload</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2>jhdhwk</h2>
+        {% if img_obj %}
+        <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+        <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px"> {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+    <script>
+        $(function() {
+
+            $('#profile').addClass('dragging').removeClass('dragging');
+        });
+
+        $('#profile').on('dragover', function() {
+            $('#profile').addClass('dragging')
+        }).on('dragleave', function() {
+            $('#profile').removeClass('dragging')
+        }).on('drop', function(e) {
+            $('#profile').removeClass('dragging hasImage');
+
+            if (e.originalEvent) {
+                var file = e.originalEvent.dataTransfer.files[0];
+                console.log(file);
+
+                var reader = new FileReader();
+
+                //attach event handlers here...
+
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    console.log(reader.result);
+                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+
+                }
+
+            }
+        })
+        $('#profile').on('click', function(e) {
+            console.log('clicked')
+            $('#mediaFile').click();
+        });
+        window.addEventListener("dragover", function(e) {
+            e = e || event;
+            e.preventDefault();
+        }, false);
+        window.addEventListener("drop", function(e) {
+            e = e || event;
+            e.preventDefault();
+        }, false);
+        $('#mediaFile').change(function(e) {
+
+            var input = e.target;
+            if (input.files && input.files[0]) {
+                var file = input.files[0];
+
+                var reader = new FileReader();
+
+                reader.readAsDataURL(file);
+                reader.onload = function(e) {
+                    console.log(reader.result);
+                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
